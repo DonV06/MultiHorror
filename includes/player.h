@@ -9,16 +9,18 @@
 #include "vector2f.h"
 #include "window.h"
 #include "Rect.h"
-class player : public Rect
+class player
 {
 public:
     void teleport(vector2f new_cords);
     void move(float x, float y);
     void draw(SDL_Renderer* renderer);
     player(vector2f _loc, vector2f _size);
+    Rect rect;
 private:
     vector2f loc;
     vector2f size;
+
 
 };
 

@@ -11,11 +11,12 @@
 #include "window.h"
 #include "Rect.h"
 
-class rectblock : public Rect
+class rectblock
 {
 public:
     void draw(SDL_Renderer* renderer);
     rectblock(vector2f _loc, vector2f _size);
+    Rect rect;
 private:
 
 };

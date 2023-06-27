@@ -16,11 +16,13 @@ public:
     Rect(vector2f loc, vector2f size);
     bool isCollidingRect(vector2f __loc, vector2f __size);
     bool isCollidingPoint(vector2f point);
-    vector2f getloc();
-    vector2f getsize();
+    float x;
+    float y;
+    float width;
+    float height;
+
 private:
-   vector2f loc;
-   vector2f size;
+
 
 };
 

@@ -15,9 +15,9 @@ public:
     void addX(float _x);
     void addY(float _y);
     vector2f(float _x, float _y);
-private:
     float x;
     float y;
+private:
 };
 
 #endif //HORRORGAME_VECTOR2F_H

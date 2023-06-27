@@ -10,16 +10,16 @@
 #include "rectblock.h"
 
 
-rectblock::rectblock(vector2f _loc, vector2f _size) : Rect(_loc, _size) {
+rectblock::rectblock(vector2f _loc, vector2f _size) : rect(_loc, _size) {
 
 }
 
 void rectblock::draw(SDL_Renderer *renderer) {
     SDL_Rect rectangle;
-    rectangle.x = getloc().getX();  // the x coordinate
-    rectangle.y = getloc().getY();  // the y coordinate
-    rectangle.w = getsize().getX(); // the width of the rectangle
-    rectangle.h = getsize().getY();  // the height of the rectangle
+    rectangle.x = rect.x;  // the x coordinate
+    rectangle.y = rect.y;  // the y coordinate
+    rectangle.w = rect.width    ; // the width of the rectangle
+    rectangle.h = rect.height;  // the height of the rectangle
 
 // Set draw color (RGBA)
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color

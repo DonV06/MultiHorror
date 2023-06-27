@@ -7,24 +7,25 @@
 #include "iostream"
 #include "player.h"
 
-player::player(vector2f _loc, vector2f _size): loc(_loc), size(_size), Rect(_loc, _size) {
+player::player(vector2f _loc, vector2f _size): loc(_loc), size(_size), rect(_loc, _size) {
 
 
 }
 
 void player::move(float x, float y) {
-    loc.addX(x);
-    loc.setY(loc.getY() + y);
+    rect.x += x;
+    rect.y += y;
     std::cout << "Adding: " << y << "Result: " << (loc.getY()) << std::endl;
 
 }
 
+
 void player::draw(SDL_Renderer* renderer) {
     SDL_Rect rectangle;
-    rectangle.x = loc.getX();  // the x coordinate
-    rectangle.y = loc.getY();  // the y coordinate
-    rectangle.w = size.getX(); // the width of the rectangle
-    rectangle.h = size.getY();  // the height of the rectangle
+    rectangle.x = rect.x;  // the x coordinate
+    rectangle.y = rect.y;  // the y coordinate
+    rectangle.w = rect.width; // the width of the rectangle
+    rectangle.h = rect.height;  // the height of the rectangle
 
 // Set draw color (RGBA)
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
