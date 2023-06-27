@@ -7,20 +7,20 @@
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
 
 #include <vector>
-#include "vector2f.h"
-#include "window.h"
+#include "Vector2f.h"
+#include "Window.h"
 class ScreenManager
 {
 public:
-    int createWindow(vector2f loc, vector2f size);
-    std::vector<window> getwindows();
-    window getWindow(int id);
+    int createWindow(Vector2f loc, Vector2f size);
+    std::vector<Window> getwindows();
+    Window getWindow(int id);
     void destroy();
     void destroyWindow(int id);
     ScreenManager();
     ~ScreenManager();
 private:
-    std::vector<window> windows;
+    std::vector<Window> windows;
 
 };
 

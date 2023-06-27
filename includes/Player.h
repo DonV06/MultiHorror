@@ -6,22 +6,18 @@
 #define MULTIHORROR_PLAYER_H
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
 #include <vector>
-#include "vector2f.h"
-#include "window.h"
+#include "Vector2f.h"
+#include "Window.h"
 #include "Rect.h"
-class player
+class Player
 {
 public:
-    void teleport(vector2f new_cords);
+    void teleport(Vector2f new_cords);
     void move(float x, float y);
     void draw(SDL_Renderer* renderer);
-    player(vector2f _loc, vector2f _size);
+    Player(Vector2f _loc, Vector2f _size);
     Rect rect;
 private:
-    vector2f loc;
-    vector2f size;
-
-
 };
 
 #endif //MULTIHORROR_PLAYER_H

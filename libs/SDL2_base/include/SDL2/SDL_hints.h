@@ -61,13 +61,13 @@ extern "C" {
  *  \brief Specify the behavior of Alt+Tab while the keyboard is grabbed.
  *
  * By default, SDL emulates Alt+Tab functionality while the keyboard is grabbed
- * and your window is full-screen. This prevents the user from getting stuck in
+ * and your Window is full-screen. This prevents the user from getting stuck in
  * your application if you've enabled keyboard grab.
  *
  * The variable can be set to the following values:
  *   "0"       - SDL will not handle Alt+Tab. Your application is responsible
                  for handling Alt+Tab while the keyboard is grabbed.
- *   "1"       - SDL will minimize your window when Alt+Tab is pressed (default)
+ *   "1"       - SDL will minimize your Window when Alt+Tab is pressed (default)
 */
 #define SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED "SDL_ALLOW_ALT_TAB_WHILE_GRABBED"
 
@@ -369,9 +369,9 @@ extern "C" {
  * This hint only applies to the emscripten platform
  *
  * The variable can be one of
- *    "#window"      - The javascript window object (this is the default)
+ *    "#Window"      - The javascript Window object (this is the default)
  *    "#document"    - The javascript document object
- *    "#screen"      - the javascript window.screen object
+ *    "#screen"      - the javascript Window.screen object
  *    "#canvas"      - the WebGL canvas element
  *    any other string without a leading # sign applies to the element on the page with that ID.
  */
@@ -411,14 +411,14 @@ extern "C" {
 #define SDL_HINT_EVENT_LOGGING   "SDL_EVENT_LOGGING"
 
 /**
- *  \brief  A variable controlling whether raising the window should be done more forcefully
+ *  \brief  A variable controlling whether raising the Window should be done more forcefully
  *
  *  This variable can be set to the following values:
  *    "0"       - No forcing (the default)
  *    "1"       - Extra level of forcing
  *
  *  At present, this is only an issue under MS Windows, which makes it nearly impossible to
- *  programmatically move a window to the foreground, for "security" reasons. See
+ *  programmatically move a Window to the foreground, for "security" reasons. See
  *  http://stackoverflow.com/a/34414846 for a discussion.
  */
 #define SDL_HINT_FORCE_RAISEWINDOW    "SDL_HINT_FORCE_RAISEWINDOW"
@@ -1109,13 +1109,13 @@ extern "C" {
 #define SDL_HINT_MOUSE_DOUBLE_CLICK_TIME    "SDL_MOUSE_DOUBLE_CLICK_TIME"
 
 /**
- *  \brief Allow mouse click events when clicking to focus an SDL window
+ *  \brief Allow mouse click events when clicking to focus an SDL Window
  *
  *  This variable can be set to the following values:
- *    "0"       - Ignore mouse clicks that activate a window
- *    "1"       - Generate events for mouse clicks that activate a window
+ *    "0"       - Ignore mouse clicks that activate a Window
+ *    "1"       - Generate events for mouse clicks that activate a Window
  *
- *  By default SDL will ignore mouse clicks that activate a window
+ *  By default SDL will ignore mouse clicks that activate a Window
  */
 #define SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH "SDL_MOUSE_FOCUS_CLICKTHROUGH"
 
@@ -1125,18 +1125,18 @@ extern "C" {
 #define SDL_HINT_MOUSE_NORMAL_SPEED_SCALE    "SDL_MOUSE_NORMAL_SPEED_SCALE"
 
 /**
- *  \brief  A variable controlling whether relative mouse mode constrains the mouse to the center of the window
+ *  \brief  A variable controlling whether relative mouse mode constrains the mouse to the center of the Window
  *
  *  This variable can be set to the following values:
- *    "0"       - Relative mouse mode constrains the mouse to the window
- *    "1"       - Relative mouse mode constrains the mouse to the center of the window
+ *    "0"       - Relative mouse mode constrains the mouse to the Window
+ *    "1"       - Relative mouse mode constrains the mouse to the center of the Window
  *
- *  Constraining to the center of the window works better for FPS games and when the
- *  application is running over RDP. Constraining to the whole window works better
+ *  Constraining to the center of the Window works better for FPS games and when the
+ *  application is running over RDP. Constraining to the whole Window works better
  *  for 2D games and increases the chance that the mouse will be in the correct
  *  position when using high DPI mice.
  *
- *  By default SDL will constrain the mouse to the center of the window
+ *  By default SDL will constrain the mouse to the center of the Window
  */
 #define SDL_HINT_MOUSE_RELATIVE_MODE_CENTER    "SDL_MOUSE_RELATIVE_MODE_CENTER"
 
@@ -1206,7 +1206,7 @@ extern "C" {
  *    "1"       - The mouse is captured while mouse buttons are pressed
  *
  *  By default the mouse is captured while mouse buttons are pressed so if the mouse is dragged
- *  outside the window, the application continues to receive mouse events until the button is
+ *  outside the Window, the application continues to receive mouse events until the button is
  *  released.
  */
 #define SDL_HINT_MOUSE_AUTO_CAPTURE    "SDL_MOUSE_AUTO_CAPTURE"
@@ -1304,7 +1304,7 @@ extern "C" {
  *  gestures (e.g. events view, close/minimize gestures), the system needs to
  *  know in which orientation the application is currently drawing its contents.
  *
- *  This does not cause the window to be rotated or resized, the application
+ *  This does not cause the Window to be rotated or resized, the application
  *  needs to take care of drawing the content in the right orientation (the
  *  framebuffer is always in portrait mode).
  *
@@ -1314,7 +1314,7 @@ extern "C" {
 #define SDL_HINT_QTWAYLAND_CONTENT_ORIENTATION "SDL_QTWAYLAND_CONTENT_ORIENTATION"
 
 /**
- *  \brief  Flags to set on QtWayland windows to integrate with the native window manager.
+ *  \brief  Flags to set on QtWayland windows to integrate with the native Window manager.
  *
  *  On QtWayland platforms, this hint controls the flags to set on the windows.
  *  For example, on Sailfish OS "OverridesSystemGestures" disables swipe gestures.
@@ -1633,10 +1633,10 @@ extern "C" {
 #define SDL_HINT_VIDEO_DOUBLE_BUFFER      "SDL_VIDEO_DOUBLE_BUFFER"
 
 /**
- * \brief A variable controlling whether the EGL window is allowed to be
+ * \brief A variable controlling whether the EGL Window is allowed to be
  * composited as transparent, rather than opaque.
  *
- * Most window systems will always render windows opaque, even if the surface
+ * Most Window systems will always render windows opaque, even if the surface
  * format has an alpha channel. This is not always true, however, so by default
  * SDL will try to enforce opaque composition. To override this behavior, you
  * can set this hint to "1".
@@ -1654,7 +1654,7 @@ extern "C" {
  * context will be automatically saved and restored when pausing the application. Additionally, some
  * platforms will assume usage of OpenGL if Vulkan isn't used. Setting this to "1" will prevent this
  * behavior, which is desireable when the application manages the graphics context, such as
- * an externally managed OpenGL context or attaching a Vulkan surface to the window.
+ * an externally managed OpenGL context or attaching a Vulkan surface to the Window.
  */
 #define SDL_HINT_VIDEO_EXTERNAL_CONTEXT    "SDL_VIDEO_EXTERNAL_CONTEXT"
 
@@ -1702,7 +1702,7 @@ extern "C" {
 /**
  *  \brief  A variable controlling whether the libdecor Wayland backend is preferred over native decrations.
  *
- *  When this hint is set, libdecor will be used to provide window decorations, even if xdg-decoration is
+ *  When this hint is set, libdecor will be used to provide Window decorations, even if xdg-decoration is
  *  available. (Note that, by default, libdecor will use xdg-decoration itself if available).
  *
  *  This variable can be set to the following values:
@@ -1755,7 +1755,7 @@ extern "C" {
 *  1. Its pixel format will be set to the same pixel format as this SDL_Window.  This is
 *  needed for example when sharing an OpenGL context across multiple windows.
 *
-*  2. The flag SDL_WINDOW_OPENGL will be set on the new window so it can be used for
+*  2. The flag SDL_WINDOW_OPENGL will be set on the new Window so it can be used for
 *  OpenGL rendering.
 *
 *  This variable can be set to the following values:
@@ -1765,24 +1765,24 @@ extern "C" {
 #define SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT    "SDL_VIDEO_WINDOW_SHARE_PIXEL_FORMAT"
 
 /**
- *  \brief  When calling SDL_CreateWindowFrom(), make the window compatible with OpenGL.
+ *  \brief  When calling SDL_CreateWindowFrom(), make the Window compatible with OpenGL.
  *
  * This variable can be set to the following values:
  * "0" - Don't add any graphics flags to the SDL_WindowFlags
  * "1" - Add SDL_WINDOW_OPENGL to the SDL_WindowFlags
  *
- * By default SDL will not make the foreign window compatible with OpenGL.
+ * By default SDL will not make the foreign Window compatible with OpenGL.
  */
 #define SDL_HINT_VIDEO_FOREIGN_WINDOW_OPENGL "SDL_VIDEO_FOREIGN_WINDOW_OPENGL"
 
 /**
- *  \brief  When calling SDL_CreateWindowFrom(), make the window compatible with Vulkan.
+ *  \brief  When calling SDL_CreateWindowFrom(), make the Window compatible with Vulkan.
  *
  * This variable can be set to the following values:
  * "0" - Don't add any graphics flags to the SDL_WindowFlags
  * "1" - Add SDL_WINDOW_VULKAN to the SDL_WindowFlags
  *
- * By default SDL will not make the foreign window compatible with Vulkan.
+ * By default SDL will not make the foreign Window compatible with Vulkan.
  */
 #define SDL_HINT_VIDEO_FOREIGN_WINDOW_VULKAN "SDL_VIDEO_FOREIGN_WINDOW_VULKAN"
 
@@ -1834,7 +1834,7 @@ extern "C" {
  *
  *  By default SDL will use _NET_WM_PING, but for applications that know they
  *  will not always be able to respond to ping requests in a timely manner they can
- *  turn it off to avoid the window manager thinking the app is hung.
+ *  turn it off to avoid the Window manager thinking the app is hung.
  *  The hint is checked in CreateWindow.
  */
 #define SDL_HINT_VIDEO_X11_NET_WM_PING      "SDL_VIDEO_X11_NET_WM_PING"
@@ -1958,8 +1958,8 @@ extern "C" {
  *  \brief  A variable controlling whether the windows message loop is processed by SDL 
  *
  *  This variable can be set to the following values:
- *    "0"       - The window message loop is not run
- *    "1"       - The window message loop is processed in SDL_PumpEvents()
+ *    "0"       - The Window message loop is not run
+ *    "1"       - The Window message loop is processed in SDL_PumpEvents()
  *
  *  By default SDL will process the windows message loop
  */
@@ -2002,10 +2002,10 @@ extern "C" {
 #define SDL_HINT_WINDOWS_INTRESOURCE_ICON_SMALL "SDL_WINDOWS_INTRESOURCE_ICON_SMALL"
 
 /**
- *  \brief Tell SDL not to generate window-close events for Alt+F4 on Windows.
+ *  \brief Tell SDL not to generate Window-close events for Alt+F4 on Windows.
  *
  * The variable can be set to the following values:
- *   "0"       - SDL will generate a window-close event when it sees Alt+F4.
+ *   "0"       - SDL will generate a Window-close event when it sees Alt+F4.
  *   "1"       - SDL will only do normal key handling for Alt+F4.
  */
 #define SDL_HINT_WINDOWS_NO_CLOSE_ON_ALT_F4 "SDL_WINDOWS_NO_CLOSE_ON_ALT_F4"
@@ -2051,7 +2051,7 @@ extern "C" {
  *    "system"       - Request system DPI awareness. (Vista and later).
  *    "permonitor"   - Request per-monitor DPI awareness. (Windows 8.1 and later).
  *    "permonitorv2" - Request per-monitor V2 DPI awareness. (Windows 10, version 1607 and later).
- *                     The most visible difference from "permonitor" is that window title bar will be scaled
+ *                     The most visible difference from "permonitor" is that Window title bar will be scaled
  *                     to the visually correct size when dragging between monitors with different scale factors.
  *                     This is the preferred DPI awareness level.
  *
@@ -2066,14 +2066,14 @@ extern "C" {
  *  This changes the SDL coordinate system units to be DPI-scaled points, rather than pixels everywhere.
  *  This means windows will be appropriately sized, even when created on high-DPI displays with scaling.
  * 
- *  e.g. requesting a 640x480 window from SDL, on a display with 125% scaling in Windows display settings,
- *  will create a window with an 800x600 client area (in pixels).
+ *  e.g. requesting a 640x480 Window from SDL, on a display with 125% scaling in Windows display settings,
+ *  will create a Window with an 800x600 client area (in pixels).
  *
  *  Setting this to "1" implicitly requests process DPI awareness (setting SDL_WINDOWS_DPI_AWARENESS is unnecessary),
  *  and forces SDL_WINDOW_ALLOW_HIGHDPI on all windows.
  * 
  *  This variable can be set to the following values:
- *    "0"       - SDL coordinates equal Windows coordinates. No automatic window resizing when dragging
+ *    "0"       - SDL coordinates equal Windows coordinates. No automatic Window resizing when dragging
  *                between monitors with different scale factors (unless this is performed by
  *                Windows itself, which is the case when the process is DPI unaware).
  *    "1"       - SDL coordinates are in DPI-scaled points. Automatically resize windows as needed on
@@ -2082,24 +2082,24 @@ extern "C" {
 #define SDL_HINT_WINDOWS_DPI_SCALING "SDL_WINDOWS_DPI_SCALING"
 
 /**
- *  \brief  A variable controlling whether the window frame and title bar are interactive when the cursor is hidden 
+ *  \brief  A variable controlling whether the Window frame and title bar are interactive when the cursor is hidden
  *
  *  This variable can be set to the following values:
- *    "0"       - The window frame is not interactive when the cursor is hidden (no move, resize, etc)
- *    "1"       - The window frame is interactive when the cursor is hidden
+ *    "0"       - The Window frame is not interactive when the cursor is hidden (no move, resize, etc)
+ *    "1"       - The Window frame is interactive when the cursor is hidden
  *
- *  By default SDL will allow interaction with the window frame when the cursor is hidden
+ *  By default SDL will allow interaction with the Window frame when the cursor is hidden
  */
 #define SDL_HINT_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN    "SDL_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN"
 
 /**
-*  \brief  A variable controlling whether the window is activated when the SDL_ShowWindow function is called 
+*  \brief  A variable controlling whether the Window is activated when the SDL_ShowWindow function is called
 *
 *  This variable can be set to the following values:
-*    "0"       - The window is activated when the SDL_ShowWindow function is called
-*    "1"       - The window is not activated when the SDL_ShowWindow function is called
+*    "0"       - The Window is activated when the SDL_ShowWindow function is called
+*    "1"       - The Window is not activated when the SDL_ShowWindow function is called
 *
-*  By default SDL will activate the window when the SDL_ShowWindow function is called
+*  By default SDL will activate the Window when the SDL_ShowWindow function is called
 */
 #define SDL_HINT_WINDOW_NO_ACTIVATION_WHEN_SHOWN    "SDL_WINDOW_NO_ACTIVATION_WHEN_SHOWN"
 
@@ -2207,7 +2207,7 @@ extern "C" {
  *
  *  If set, this _might_ increase framerate at the expense of the desktop
  *  not working as expected. Override-redirect windows aren't noticed by the
- *  window manager at all.
+ *  Window manager at all.
  *
  *  You should probably only use this for fullscreen windows, and you probably
  *  shouldn't even use it for that. But it's here if you want to try!
@@ -2266,11 +2266,11 @@ extern "C" {
  *  This is currently only used for X11 and ignored elsewhere.
  *
  *  During SDL_CreateWindow, SDL uses the _NET_WM_WINDOW_TYPE X11 property
- *  to report to the window manager the type of window it wants to create.
+ *  to report to the Window manager the type of Window it wants to create.
  *  This might be set to various things if SDL_WINDOW_TOOLTIP or
  *  SDL_WINDOW_POPUP_MENU, etc, were specified. For "normal" windows that
  *  haven't set a specific type, this hint can be used to specify a custom
- *  type. For example, a dock window might set this to
+ *  type. For example, a dock Window might set this to
  *  "_NET_WM_WINDOW_TYPE_DOCK".
  *
  *  If not set or set to "", this hint is ignored. This hint must be set
@@ -2281,18 +2281,18 @@ extern "C" {
 #define SDL_HINT_X11_WINDOW_TYPE "SDL_X11_WINDOW_TYPE"
 
 /**
- *  \brief  A variable that decides whether to send SDL_QUIT when closing the final window.
+ *  \brief  A variable that decides whether to send SDL_QUIT when closing the final Window.
  *
- *  By default, SDL sends an SDL_QUIT event when there is only one window
+ *  By default, SDL sends an SDL_QUIT event when there is only one Window
  *  and it receives an SDL_WINDOWEVENT_CLOSE event, under the assumption most
- *  apps would also take the loss of this window as a signal to terminate the
+ *  apps would also take the loss of this Window as a signal to terminate the
  *  program.
  *
  *  However, it's not unreasonable in some cases to have the program continue
  *  to live on, perhaps to create new windows later.
  *
  *  Changing this hint to "0" will cause SDL to not send an SDL_QUIT event
- *  when the final window is requesting to close. Note that in this case,
+ *  when the final Window is requesting to close. Note that in this case,
  *  there are still other legitimate reasons one might get an SDL_QUIT
  *  event: choosing "Quit" from the macOS menu bar, sending a SIGINT (ctrl-c)
  *  on Unix, etc.
@@ -2300,7 +2300,7 @@ extern "C" {
  *  The default value is "1".  This hint can be changed at any time.
  *
  *  This hint is available since SDL 2.0.22. Before then, you always get
- *  an SDL_QUIT event when closing the final window.
+ *  an SDL_QUIT event when closing the final Window.
  */
 #define SDL_HINT_QUIT_ON_LAST_WINDOW_CLOSE "SDL_QUIT_ON_LAST_WINDOW_CLOSE"
 

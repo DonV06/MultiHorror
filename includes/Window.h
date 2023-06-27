@@ -2,15 +2,15 @@
 // Created by DonV06 on 18.06.2023.
 //
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
-#include "vector2f.h"
+#include "Vector2f.h"
 
 #ifndef HORRORGAME_WINDOW_H
 #define HORRORGAME_WINDOW_H
-class window
+class Window
 {
 public:
-    window(vector2f _loc, vector2f _size);
-    ~window();
+    Window(Vector2f _loc, Vector2f _size);
+    ~Window();
     void destory();
     SDL_Window* getSDLwindow();
     SDL_Renderer* getsdlRenderer();

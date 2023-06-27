@@ -5,7 +5,7 @@
 #ifndef HORRORGAME_VECTOR2F_H
 #define HORRORGAME_VECTOR2F_H
 
-class vector2f
+class Vector2f
 {
 public:
     float getY();
@@ -14,7 +14,7 @@ public:
     void setX(float _x);
     void addX(float _x);
     void addY(float _y);
-    vector2f(float _x, float _y);
+    Vector2f(float _x, float _y);
     float x;
     float y;
 private:

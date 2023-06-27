@@ -1,24 +1,29 @@
 //
-// Created by DonV06 on 25.06.2023.
+// Created by DonV06 on 21.06.2023.
 //
-
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
 #include <vector>
-#include "vector2f.h"
-#include "window.h"
-#include "Rect.h"
-#include "rectblock.h"
+#include "Vector2f.h"
+#include "iostream"
+#include "Player.h"
 
+Player::Player(Vector2f _loc, Vector2f _size): rect(_loc, _size) {
 
-rectblock::rectblock(vector2f _loc, vector2f _size) : rect(_loc, _size) {
 
 }
 
-void rectblock::draw(SDL_Renderer *renderer) {
+void Player::move(float x, float y) {
+    rect.x += x;
+    rect.y += y;
+
+}
+
+
+void Player::draw(SDL_Renderer* renderer) {
     SDL_Rect rectangle;
     rectangle.x = rect.x;  // the x coordinate
     rectangle.y = rect.y;  // the y coordinate
-    rectangle.w = rect.width    ; // the width of the rectangle
+    rectangle.w = rect.width; // the width of the rectangle
     rectangle.h = rect.height;  // the height of the rectangle
 
 // Set draw color (RGBA)
@@ -28,4 +33,8 @@ void rectblock::draw(SDL_Renderer *renderer) {
     SDL_RenderFillRect(renderer, &rectangle);
 
 
+
 }
+
+
+

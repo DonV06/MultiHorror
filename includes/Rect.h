@@ -7,15 +7,16 @@
 
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
 #include <vector>
-#include "vector2f.h"
-#include "window.h"
+#include "Vector2f.h"
+#include "Window.h"
 
 class Rect
 {
 public:
-    Rect(vector2f loc, vector2f size);
-    bool isCollidingRect(vector2f __loc, vector2f __size);
-    bool isCollidingPoint(vector2f point);
+    Rect(Vector2f loc, Vector2f size);
+    bool isCollidingVectors(Vector2f __loc, Vector2f __size);
+    bool isCollidingRect(Rect rect);
+    bool isCollidingPoint(Vector2f point);
     float x;
     float y;
     float width;

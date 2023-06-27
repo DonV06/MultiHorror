@@ -4,24 +4,24 @@
 
 
 #include "ScreenManager.h"
-#include "vector2f.h"
-#include "window.h"
+#include "Vector2f.h"
+#include "Window.h"
 bool isIndexAvailable(const std::vector<int>& vec, int index) {
     return (index >= 0 && index < vec.size());
 }
 
 
-int ScreenManager::createWindow(vector2f loc, vector2f size) {
-    window newwindow(loc, size);
+int ScreenManager::createWindow(Vector2f loc, Vector2f size) {
+    Window newwindow(loc, size);
     windows.push_back(newwindow);
 
 }
 
-std::vector<window> ScreenManager::getwindows() {
+std::vector<Window> ScreenManager::getwindows() {
     return windows;
 }
 
-window ScreenManager::getWindow(int id) {
+Window ScreenManager::getWindow(int id) {
     return windows[id];
 }
 
@@ -30,14 +30,14 @@ ScreenManager::ScreenManager() {
 }
 
 ScreenManager::~ScreenManager() {
-    for (window currentwin: windows) {
+    for (Window currentwin: windows) {
         SDL_DestroyWindow(currentwin.getSDLwindow());
         SDL_DestroyRenderer(currentwin.getsdlRenderer());
     }
 }
 
 void ScreenManager::destroy() {
-    for (window currentwin: windows) {
+    for (Window currentwin: windows) {
         SDL_DestroyWindow(currentwin.getSDLwindow());
         SDL_DestroyRenderer(currentwin.getsdlRenderer());
 
@@ -45,7 +45,7 @@ void ScreenManager::destroy() {
 }
 
 void ScreenManager::destroyWindow(int id) {
-    window curr = windows[id];
+    Window curr = windows[id];
 
 
 }

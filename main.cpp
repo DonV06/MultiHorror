@@ -1,13 +1,14 @@
 #include <iostream>
 #include "libs/SDL2_base/include/SDL2/SDL.h"
-#include "includes/vector2f.h"
+#include "includes/Vector2f.h"
 #include "includes/ScreenManager.h"
-#include "includes/window.h"
+#include "includes/Window.h"
 #include "libs/SDL2_image/include/SDL2/SDL_image.h"
-#include "includes/player.h"
-#include "includes/rectblock.h"
+#include "includes/Player.h"
+#include "includes/RectBlock.h"
 #include <algorithm>
 #include <random>
+#include "includes/Wall.h"
 
 // Function that generates a random integer between min and max (inclusive)
 int generateRandomNumber(int min, int max) {
@@ -21,20 +22,23 @@ const int FPS = 144;
 const int frameDelay = 1000 / FPS;
 Uint32 frameStart;
 int frameTime;
-std::vector<rectblock> rectblocks;
+std::vector<RectBlock> rectblocks;
+std::vector<Wall> Walls;
 int main(int argc, char* argv[]) {
     ScreenManager manager;
-    manager.createWindow(vector2f(-1, -1), vector2f(1000, 700));
+    manager.createWindow(Vector2f(-1, -1), Vector2f(1000, 700));
 
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
         std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
         return 1;
     }
     float speed = 5;
-    player _player(vector2f(600, 0), vector2f(100, 100));
+    Player player(Vector2f(600, 0), Vector2f(100, 100));
 
-    window mainwindow = manager.getWindow(0);
-    rectblocks.push_back(rectblock(vector2f(0, 20), vector2f(100, 100)));
+
+    Window mainwindow = manager.getWindow(0);
+    rectblocks.push_back(RectBlock(Vector2f(0, 20), Vector2f(100, 100)));
+    Walls.push_back(Wall(Vector2f(20, 100), Vector2f(100, 600)));
     bool mainloop = true;
     SDL_Event event;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -51,38 +55,42 @@ int main(int argc, char* argv[]) {
         SDL_SetRenderDrawColor(mainwindow.getsdlRenderer(), 0, 0, 0, 255);
         // Clear the renderer with the draw color
         SDL_RenderClear(mainwindow.getsdlRenderer());
-        for (rectblock& rectb : rectblocks) { // Use rectblock& to make rectb a reference, not a copy
+        for (RectBlock& rectb : rectblocks) { // Use RectBlock& to make rectb a reference, not a copy
 
-            if (_player.rect.isCollidingRect(vector2f(rectb.rect.x, rectb.rect.y), vector2f(rectb.rect.width, rectb.rect.height))) {
-                rectb.rect.y = generateRandomNumber(0, 600);
-                rectb.rect.x = generateRandomNumber(0, 600);
+            if (player.rect.isCollidingVectors(Vector2f(rectb.x, rectb.y), Vector2f(rectb.width, rectb.height))) {
+            //if (player.rect.isCollidingRect(rectb) {
 
-                manager.createWindow(vector2f(-1, -1), vector2f(400, 400));
+                rectb.y = generateRandomNumber(0, 600);
+                rectb.x = generateRandomNumber(0, 600);
             }
         }
 
-        std::cout << rectblocks[0].rect.x << " " << std::endl;
+        std::cout << rectblocks[0].x << " " << std::endl;
         int windowsposX, windowposY;
         SDL_GetWindowPosition(mainwindow.getSDLwindow(), &windowsposX, &windowposY);
-
+        Vector2f poschange(0, 0);
         if (state[SDL_SCANCODE_W]) {
-            _player.rect.y += -speed;
+            player.rect.y += -speed;
         }
         if (state[SDL_SCANCODE_A]) {
-            _player.rect.x += -speed;
+            player.rect.x += -speed;
         }
         if (state[SDL_SCANCODE_D]) {
-            _player.rect.x += speed;
+            player.rect.x += speed;
         }
         if (state[SDL_SCANCODE_S]) {
-            _player.rect.y += speed;
+            player.rect.y += speed;
         }
-        _player.draw(mainwindow.getsdlRenderer());
-        for (rectblock block : rectblocks) {
+        player.draw(mainwindow.getsdlRenderer());
+        for (RectBlock block : rectblocks) {
             block.draw(mainwindow.getsdlRenderer());
         }
 
-        for (window currentwin: manager.getwindows()) {
+        for (Wall wall : Walls) {
+            wall.draw(mainwindow.getsdlRenderer());
+        }
+
+        for (Window currentwin: manager.getwindows()) {
             SDL_RenderPresent(currentwin.getsdlRenderer());
         }
         frameTime = SDL_GetTicks() - frameStart;

@@ -10,7 +10,7 @@ find_package(SDL2_image REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_image_INCLUDE_DIRS})
-add_executable(MultiHorror main.cpp includes/ScreenManager.cpp includes/ScreenManager.h includes/vector2f.cpp includes/vector2f.h includes/window.cpp includes/window.h includes/window.cpp includes/player.h includes/player.cpp includes/rectblock.h includes/Rect.h includes/Rect.cpp includes/rectblock.cpp)
+add_executable(MultiHorror main.cpp includes/ScreenManager.cpp includes/ScreenManager.h includes/Vector2f.cpp includes/Vector2f.h includes/Window.cpp includes/Window.h includes/Window.cpp includes/Player.h includes/Player.cpp includes/RectBlock.h includes/Rect.h includes/Rect.cpp includes/RectBlock.cpp includes/Wall.h includes/Wall.cpp)
 
 
 set_target_properties(MultiHorror PROPERTIES

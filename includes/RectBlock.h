@@ -7,16 +7,16 @@
 
 #include "../libs/SDL2_base/include/SDL2/SDL.h"
 #include <vector>
-#include "vector2f.h"
-#include "window.h"
+#include "Vector2f.h"
+#include "Window.h"
 #include "Rect.h"
 
-class rectblock
+class RectBlock : public Rect
 {
 public:
     void draw(SDL_Renderer* renderer);
-    rectblock(vector2f _loc, vector2f _size);
-    Rect rect;
+    RectBlock(Vector2f _loc, Vector2f _size);
+
 private:
 
 };
