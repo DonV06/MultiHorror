@@ -33,12 +33,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     float speed = 5;
-    Player player(Vector2f(600, 0), Vector2f(100, 100));
+    Player player(Vector2f(600, 600), Vector2f(400, 100));
 
 
     Window mainwindow = manager.getWindow(0);
     rectblocks.push_back(RectBlock(Vector2f(0, 20), Vector2f(100, 100)));
     Walls.push_back(Wall(Vector2f(20, 100), Vector2f(100, 600)));
+    Walls.push_back(Wall(Vector2f(300, 200), Vector2f(600, 100)));
     bool mainloop = true;
     SDL_Event event;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -70,25 +71,53 @@ int main(int argc, char* argv[]) {
         SDL_GetWindowPosition(mainwindow.getSDLwindow(), &windowsposX, &windowposY);
         Vector2f poschange(0, 0);
         if (state[SDL_SCANCODE_W]) {
-            player.rect.y += -speed;
+            poschange.addY(-speed);
+            for (Wall& wall : Walls) {
+
+                if (wall.isCollidingVectors(Vector2f(player.rect.x + poschange.x, player.rect.y + poschange.y), Vector2f(player.rect.width, player.rect.height))){
+                    poschange.setY(0);
+                }
+            }
         }
         if (state[SDL_SCANCODE_A]) {
-            player.rect.x += -speed;
+            poschange.addX(-speed);
+            for (Wall& wall : Walls) {
+
+                if (wall.isCollidingVectors(Vector2f(player.rect.x + poschange.x, player.rect.y + poschange.y), Vector2f(player.rect.width, player.rect.height))){
+                    poschange.setX(0);
+                }
+            }
         }
         if (state[SDL_SCANCODE_D]) {
-            player.rect.x += speed;
+            poschange.addX(speed);
+            for (Wall& wall : Walls) {
+
+                if (wall.isCollidingVectors(Vector2f(player.rect.x + poschange.x, player.rect.y + poschange.y), Vector2f(player.rect.width, player.rect.height))){
+                    poschange.setX(0);
+                }
+            }
         }
         if (state[SDL_SCANCODE_S]) {
-            player.rect.y += speed;
+            poschange.addY(speed);
+            for (Wall& wall : Walls) {
+                if (wall.isCollidingVectors(Vector2f(player.rect.x + poschange.x, player.rect.y + poschange.y), Vector2f(player.rect.width, player.rect.height))){
+                    poschange.setY(0);
+                }
+            }
         }
+
+        player.rect.x += poschange.x;
+        player.rect.y += poschange.y;
+
         player.draw(mainwindow.getsdlRenderer());
         for (RectBlock block : rectblocks) {
             block.draw(mainwindow.getsdlRenderer());
         }
-
-        for (Wall wall : Walls) {
+        for (Wall& wall : Walls) {
             wall.draw(mainwindow.getsdlRenderer());
         }
+
+
 
         for (Window currentwin: manager.getwindows()) {
             SDL_RenderPresent(currentwin.getsdlRenderer());
