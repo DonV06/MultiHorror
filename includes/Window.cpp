@@ -13,7 +13,8 @@ Window::Window(Vector2f _loc, Vector2f _size) {
                                               SDL_WINDOWPOS_UNDEFINED,
                                               SDL_WINDOWPOS_UNDEFINED,
                                               _size.getX(), _size.getY(),
-                                              SDL_WINDOW_SHOWN);
+                                              SDL_WINDOW_SHOWN
+                                              );
 
         sdlWindow = window;
         SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);

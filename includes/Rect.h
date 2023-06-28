@@ -17,6 +17,7 @@ public:
     bool isCollidingVectors(Vector2f __loc, Vector2f __size);
     bool isCollidingRect(Rect rect);
     bool isCollidingPoint(Vector2f point);
+    float angleBetweenRect(Rect rect);
     float x;
     float y;
     float width;

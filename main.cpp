@@ -8,9 +8,23 @@
 #include "includes/RectBlock.h"
 #include <algorithm>
 #include <random>
+#include "includes/Enemy.h"
 #include "includes/Wall.h"
-
+#include "includes/AlgoritmicMap.h"
+#include "includes/AstarNode.h"
 // Function that generates a random integer between min and max (inclusive)
+
+std::vector<AstarNode> generateNodes(int size) {
+    std::vector<AstarNode> nodes;
+    for (int vi_x = 0; vi_x < 1000/size; vi_x++) {
+        for (int vi_y = 0; vi_y < 700/size; vi_y++) {
+            nodes.push_back(AstarNode(Vector2f(vi_x * size, vi_y * size), Vector2f(vi_x, vi_y), size));
+        }
+    }
+    return nodes;
+
+}
+
 int generateRandomNumber(int min, int max) {
     // static used for efficiency, so a new random engine isn't created every call
     static std::random_device rd;
@@ -23,6 +37,7 @@ const int frameDelay = 1000 / FPS;
 Uint32 frameStart;
 int frameTime;
 std::vector<RectBlock> rectblocks;
+std::vector<Enemy> Enemys;
 std::vector<Wall> Walls;
 int main(int argc, char* argv[]) {
     ScreenManager manager;
@@ -32,14 +47,15 @@ int main(int argc, char* argv[]) {
         std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
         return 1;
     }
+
+    AlgoritmicMap algoritmicMap;
+    algoritmicMap.nodes = generateNodes(10);
+
     float speed = 5;
-    Player player(Vector2f(600, 600), Vector2f(400, 100));
-
-
+    Player player(Vector2f(600, 600), Vector2f(50, 50));
+    Walls.push_back(Wall(Vector2f(500, 300), Vector2f(100, 300)));
+    Enemys.push_back(Enemy(Vector2f(20, 20), Vector2f(50, 50), player));
     Window mainwindow = manager.getWindow(0);
-    rectblocks.push_back(RectBlock(Vector2f(0, 20), Vector2f(100, 100)));
-    Walls.push_back(Wall(Vector2f(20, 100), Vector2f(100, 600)));
-    Walls.push_back(Wall(Vector2f(300, 200), Vector2f(600, 100)));
     bool mainloop = true;
     SDL_Event event;
     const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -56,17 +72,8 @@ int main(int argc, char* argv[]) {
         SDL_SetRenderDrawColor(mainwindow.getsdlRenderer(), 0, 0, 0, 255);
         // Clear the renderer with the draw color
         SDL_RenderClear(mainwindow.getsdlRenderer());
-        for (RectBlock& rectb : rectblocks) { // Use RectBlock& to make rectb a reference, not a copy
 
-            if (player.rect.isCollidingVectors(Vector2f(rectb.x, rectb.y), Vector2f(rectb.width, rectb.height))) {
-            //if (player.rect.isCollidingRect(rectb) {
 
-                rectb.y = generateRandomNumber(0, 600);
-                rectb.x = generateRandomNumber(0, 600);
-            }
-        }
-
-        std::cout << rectblocks[0].x << " " << std::endl;
         int windowsposX, windowposY;
         SDL_GetWindowPosition(mainwindow.getSDLwindow(), &windowsposX, &windowposY);
         Vector2f poschange(0, 0);
@@ -105,7 +112,7 @@ int main(int argc, char* argv[]) {
                 }
             }
         }
-
+        algoritmicMap.draw(mainwindow.getsdlRenderer());
         player.rect.x += poschange.x;
         player.rect.y += poschange.y;
 
@@ -115,6 +122,9 @@ int main(int argc, char* argv[]) {
         }
         for (Wall& wall : Walls) {
             wall.draw(mainwindow.getsdlRenderer());
+        }
+        for (Enemy& enemy : Enemys) {
+            enemy.draw(mainwindow.getsdlRenderer(), Walls);
         }
 
 
