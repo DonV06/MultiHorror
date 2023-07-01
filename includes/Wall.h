@@ -13,7 +13,8 @@
 class Wall : public RectBlock
 {
 public:
-    Wall(Vector2f locaction, Vector2f size);
+
+    Wall(Vector2f locaction, Vector2f size) : RectBlock(locaction, size) {}
 
 };
 #endif //MULTIHORROR_WALL_H

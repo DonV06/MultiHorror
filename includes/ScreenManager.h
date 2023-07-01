@@ -12,13 +12,41 @@
 class ScreenManager
 {
 public:
-    int createWindow(Vector2f loc, Vector2f size);
-    std::vector<Window> getwindows();
-    Window getWindow(int id);
-    void destroy();
-    void destroyWindow(int id);
-    ScreenManager();
-    ~ScreenManager();
+    bool isIndexAvailable(const std::vector<int>& vec, int index) {
+        return (index >= 0 && index < vec.size());
+    }
+    int createWindow(Vector2f loc, Vector2f size) {
+        Window newwindow(loc, size);
+        windows.push_back(newwindow);
+
+    }
+    std::vector<Window> getwindows() {
+        return windows;
+    }
+    Window getWindow(int id) {
+        return windows[id];
+    }
+    ScreenManager() {
+
+    }
+    ~ScreenManager() {
+        for (Window currentwin: windows) {
+            SDL_DestroyWindow(currentwin.getSDLwindow());
+            SDL_DestroyRenderer(currentwin.getsdlRenderer());
+        }
+    }
+    void destroy() {
+        for (Window currentwin: windows) {
+            SDL_DestroyWindow(currentwin.getSDLwindow());
+            SDL_DestroyRenderer(currentwin.getsdlRenderer());
+
+        }
+    }
+    void destroyWindow(int id) {
+        Window curr = windows[id];
+
+
+    }
 private:
     std::vector<Window> windows;
 

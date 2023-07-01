@@ -8,15 +8,36 @@
 class Vector2f
 {
 public:
-    float getY();
-    float getX();
-    void setY(float _y);
-    void setX(float _x);
-    void addX(float _x);
-    void addY(float _y);
-    Vector2f(float _x, float _y);
     float x;
     float y;
+    float getX() {return x;}
+    float getY() {return y;}
+    void setX(float _x) {
+        x = _x;
+    }
+    void setY(float _y) {
+        y = _y;
+    }
+    Vector2f(float _x, float _y): x(_x), y(_y) {
+    }
+    void addX(float _x) {
+        x += _x;
+
+    }
+    void addY(float _y) {
+        y += _y;
+        std::cout << "Adding: " << _y << " Result: " << y << std::endl;
+    }
+    void addVector(Vector2f vector) {
+        x += vector.x;
+        y += vector.y;
+    }
+    bool operator==(const Vector2f& other) const {
+        return x == other.x && y == other.y;
+    }
+    bool operator!=(const Vector2f& other) const {
+        return x != other.x || y != other.y;
+    }
 private:
 };
 
